@@ -34,7 +34,7 @@ func serveCves(w http.ResponseWriter, r *http.Request) {
 	//		r.Host,
 	//		"some_data",
 	//	}
-	w.Write([]byte("cve page"))
+	//w.Write([]byte("cve page"))
 	// TODO: в случае ошибки на нижнем уровне выводить сюда ошибку
 	w.Write([]byte(CACHE.GetAllcveJson()))
 	//	packet_list_Templ.Execute(w, &v)

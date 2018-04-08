@@ -56,10 +56,11 @@ func main() {
 	webserver.ServAddr = cfg.ServAddr
 	webserver.CACHE = CACHE //передаем созданный кэш что бы веб сервер мог дергать метод
 	// GetAllcveJson()
-	go webserver.Start_and_open()
-	//go webserver.Start()
-	go PeriodicalyLoad(LOADER, CACHE)
-	fmt.Scanln()
+	//go webserver.Start_and_open()
+	go webserver.Start()
+	//go PeriodicalyLoad(LOADER, CACHE)
+	PeriodicalyLoad(LOADER, CACHE)
+	//fmt.Scanln()
 }
 
 func PeriodicalyLoad(l *loader.Loader, cache *cache.Cache) {
@@ -80,7 +81,6 @@ func (writer logWriter) Write(bytes []byte) (int, error) {
 }
 
 func ReadConfig(fname string) Config {
-	runtime.GOMAXPROCS(runtime.NumCPU())
 	file, err := os.Open(fname)
 	if err != nil {
 		//dbg.Println("opening config file error", err)
