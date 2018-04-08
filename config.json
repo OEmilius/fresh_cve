@@ -1,0 +1,15 @@
+ {
+"ServAddr": ":8081",
+"Interval": 30,
+"Sources": [{"Format": "circl",
+	"Address": "http://cve.circl.lu/api/last/6"},
+	{"Format": "redh",
+	"Address": "http://access.redhat.com/labs/securitydataapi/cve.json?after=2018-03-14"}],
+"DefaultTimeoutSec": 4,
+"Proxy": "http://omin-e:Bercut19@192.168.55.8:3128/",
+"FileGobName": "cache.gob",
+"end_config": "end",
+"old_Sources": "http://access.redhat.com/labs/securitydataapi/cvrf.json?after=2018-03-26"
+}
+
+
