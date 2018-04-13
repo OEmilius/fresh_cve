@@ -10,13 +10,14 @@ package main
 
 import (
 	"encoding/json"
-	"fresh_cve/cache"
-	"fresh_cve/loader"
-	"fresh_cve/webserver"
 	"log"
 	"os"
 	"runtime"
 	"time"
+
+	"github.com/OEmilius/fresh_cve/cache"
+	"github.com/OEmilius/fresh_cve/loader"
+	"github.com/OEmilius/fresh_cve/webserver"
 )
 
 type Config struct {

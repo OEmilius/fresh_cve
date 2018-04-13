@@ -2,13 +2,14 @@
 package loader
 
 import (
-	"fresh_cve/cache"
-	"fresh_cve/cve"
-	circl "fresh_cve/cve/cve_circl"
-	redhat "fresh_cve/cve/cve_redhat"
-	"fresh_cve/provider"
 	"log"
 	"time"
+
+	"github.com/OEmilius/fresh_cve/cache"
+	"github.com/OEmilius/fresh_cve/cve"
+	circl "github.com/OEmilius/fresh_cve/cve/cve_circl"
+	redhat "github.com/OEmilius/fresh_cve/cve/cve_redhat"
+	"github.com/OEmilius/fresh_cve/provider"
 )
 
 type Loader struct {

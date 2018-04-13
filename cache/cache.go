@@ -4,8 +4,9 @@ package cache
 import (
 	"encoding/json"
 	storage "fresh_cve/cache/storage_gob"
-	"fresh_cve/cve"
 	"log"
+
+	"github.com/OEmilius/fresh_cve/cve"
 )
 
 //TODO: RACE подумать ОПАСНОСТЬ добавить mutexы

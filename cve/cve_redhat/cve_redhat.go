@@ -3,8 +3,9 @@ package cve_redhat
 
 import (
 	"encoding/json"
-	"fresh_cve/cve"
 	"log"
+
+	"github.com/OEmilius/fresh_cve/cve"
 )
 
 //Decode from string containing json array to []cve.Cve
