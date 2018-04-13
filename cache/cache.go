@@ -1,13 +1,7 @@
-/*
-принял решение сохранять кэш в gob фаил
-в случае смены типа хранилища
-перепсать в хранилище методы Save, Load
-*/
-
+//Memory cashe implemented using simply map
 package cache
 
 import (
-	//	"fmt"
 	"encoding/json"
 	storage "fresh_cve/cache/storage_gob"
 	"fresh_cve/cve"
@@ -38,19 +32,6 @@ func (cache *Cache) GetAllCve() (list []cve.Cve) {
 	return list
 }
 
-//уточнить у заказчика о необходимости переносов и отступов
-// в тз так
-//[
-//	{
-//		"id": "CVE-2017-4825",
-//		"published": "2018-03-16T10: 29: 41.613000"
-//	},
-//	{
-//		"id": "CVE-2017-4826",
-//		"published": "2018-03-16T10:29:41.677000"
-//	},
-//...
-//] при необходимости строго соблюдения переписать вывод
 func (cache *Cache) GetAllcveJson() string {
 	b, err := json.Marshal(cache.GetAllCve())
 	if err != nil {

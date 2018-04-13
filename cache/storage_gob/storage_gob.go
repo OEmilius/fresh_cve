@@ -1,3 +1,4 @@
+//Save, Load from to gob file
 package storage_gob
 
 import (
@@ -6,6 +7,7 @@ import (
 	"os"
 )
 
+//Save object to file from path
 func Save(path string, object interface{}) error {
 	file, err := os.Create(path)
 	if err == nil {
@@ -29,6 +31,7 @@ func Load(path string, object interface{}) error {
 	return err
 }
 
+//Delete file
 func DeleteFile(path string) error {
 	//err := os.Remove(path)
 	return os.Remove(path)

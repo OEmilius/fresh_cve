@@ -1,3 +1,4 @@
+//implement loader, which have Query() method
 package loader
 
 import (
@@ -17,12 +18,18 @@ type Loader struct {
 	Cache             *cache.Cache
 }
 
+//Sources format
 type Src struct {
 	Format  string
 	Address string
 }
 
+func NewLoader() *Loader {
+	return &Loader{Cache: cache.NewCache()}
+}
+
 func DecodeAnswer(a provider.Answer) (result []cve.Cve) {
+	log.Println("start DecodeAnswer")
 	var err error
 	switch a.Format {
 	case "redh":
@@ -44,19 +51,11 @@ func DecodeAnswer(a provider.Answer) (result []cve.Cve) {
 	return result
 }
 
-func NewLoader() *Loader {
-	return &Loader{Cache: cache.NewCache()}
-}
-
-func (l *Loader) QueryAndCombine() []cve.Cve {
-	l.Cache.AddList(l.Query())
-	return l.Cache.GetAllCve()
-}
-
-//уточнить по тз реализовать default timeout или для каждого свой
+//Load concurent fresh cve from Source
 func (l Loader) Query() (result []cve.Cve) {
 	log.Println("Loader Query start")
 	ans_chan := make(chan provider.Answer, len(l.Sources))
+	//ans_chan := make(chan provider.Answer)
 	timeout := time.After(time.Duration(l.DefaultTimeoutSec) * time.Second)
 	log.Println("loader timeout=", l.DefaultTimeoutSec)
 	for _, src := range l.Sources {
@@ -67,7 +66,7 @@ func (l Loader) Query() (result []cve.Cve) {
 		go p.GetBodyToChan(ans_chan)
 	}
 	for i, _ := range l.Sources {
-		log.Println(i)
+		log.Println("read from chan step ", i)
 		select {
 		case a := <-ans_chan:
 			log.Println("get answer Format = ", a.Format)
@@ -76,7 +75,13 @@ func (l Loader) Query() (result []cve.Cve) {
 			result = append(result, answers...)
 		case <-timeout:
 			log.Println("Default timeout ")
+			return result
 		}
 	}
 	return result
+}
+
+func (l *Loader) QueryAndCombine() []cve.Cve {
+	l.Cache.AddList(l.Query())
+	return l.Cache.GetAllCve()
 }

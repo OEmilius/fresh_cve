@@ -1,8 +1,6 @@
+//common cve format
+
 package cve
-
-//_ "encoding/json"
-
-//один на всех мы за ценой не постоим
 
 type Cve struct {
 	Id        string `json:"id"`
@@ -10,5 +8,3 @@ type Cve struct {
 	Summary   string `json:"summary"`
 	Urls      []string
 }
-
-// выше формат маршалинга ответных

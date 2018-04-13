@@ -1,3 +1,4 @@
+//Convert json array to array []cve{} format
 package cve_redhat
 
 import (
@@ -6,24 +7,7 @@ import (
 	"log"
 )
 
-//type Cve struct {
-//	Id        string `json:"CVE"`
-//	Published string `json:"public_date"`
-//	Summary   string `json:"bugzilla_description"`
-//	Url       string `json:"resource_url"`
-//}
-
-//func (c Cve) String() {
-//	fmt.Sprintf("%v", c)
-//}
-
-//func Decode(s string) (c Cve) {
-//	if err := json.Unmarshal([]byte(one_cve), &c); err != nil {
-//		panic(err)
-//	}
-//	return c
-//}
-
+//Decode from string containing json array to []cve.Cve
 func Decode(s string) (cve_list []cve.Cve, err error) {
 	var list []map[string]interface{}
 	if err := json.Unmarshal([]byte(s), &list); err != nil {
