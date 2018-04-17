@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package cve;
+
+service Offender {
+  rpc GetCves (CveRequest) returns (CveReply) {}
+}
+
+//all cves -> filter="all"
+message CveRequest {
+  string filter = 1;
+}
+
+message CveReply {
+	repeated Cve cves = 1;
+}
+
+message Cve {
+	string id = 1 ;
+	string published = 2;
+	string summary = 3;
+	repeated string urls = 4;
+}
+

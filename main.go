@@ -10,18 +10,21 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
 	"os"
 	"runtime"
 	"time"
 
 	"github.com/OEmilius/fresh_cve/cache"
+	"github.com/OEmilius/fresh_cve/grpc_server"
 	"github.com/OEmilius/fresh_cve/loader"
 	"github.com/OEmilius/fresh_cve/webserver"
 )
 
 type Config struct {
 	ServAddr          string       // address for start web server
+	GrpcPort          string       // Port for listen grps server
 	Interval          int          // sec for PeriodicalyLoad
 	DefaultTimeoutSec int          // sec for Loader
 	Proxy             string       // for providers proxy, if no proxy use ""
@@ -51,7 +54,11 @@ func main() {
 	webserver.ServAddr = cfg.ServAddr
 	webserver.CACHE = CACHE
 	go webserver.Start()
-	PeriodicalyLoad(LOADER, CACHE)
+	grpc_server.ListenPort = cfg.GrpcPort
+	grpc_server.CACHE = CACHE
+	go grpc_server.Start()
+	go PeriodicalyLoad(LOADER, CACHE)
+	fmt.Scanln()
 }
 
 func PeriodicalyLoad(l *loader.Loader, cache *cache.Cache) {

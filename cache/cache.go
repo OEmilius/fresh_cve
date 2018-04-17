@@ -41,6 +41,13 @@ func (cache *Cache) GetAllcveJson() string {
 	return string(b)
 }
 
+func (cache *Cache) GetAllCve_forGrpc() (list []*cve.Cve) {
+	for _, cve := range cache.cveMap {
+		list = append(list, &cve)
+	}
+	return list
+}
+
 func (cache *Cache) Save() error {
 	log.Println("saving cache")
 	return storage.Save(cache.FileGobName, cache.cveMap)

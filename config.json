@@ -1,5 +1,6 @@
 {
 "ServAddr": ":8081",
+"GrpcPort": ":50051",
 "Interval": 20,
 "DefaultTimeoutSec": 6,
 "Sources": [
