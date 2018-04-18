@@ -3,8 +3,9 @@ package cache
 
 import (
 	"encoding/json"
-	storage "fresh_cve/cache/storage_gob"
 	"log"
+
+	storage "github.com/OEmilius/fresh_cve/cache/storage_gob"
 
 	"github.com/OEmilius/fresh_cve/cve"
 )

@@ -67,7 +67,6 @@ func PeriodicalyLoad(l *loader.Loader, cache *cache.Cache) {
 		<-Tick.C
 		log.Println("time to get fresh CVE| cfg.Interval=", cfg.Interval)
 		cache.AddList(l.Query())
-		log.Println("cache size is=", len(cache.GetAllCve()))
 	}
 }
 
